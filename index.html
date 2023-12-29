@@ -1,360 +1,551 @@
-<!DOCTYPE HTML>
-<!--
-	Dimension by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>Welcome</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="assets/css/posture-editor.css">
+	<link rel="stylesheet" href="assets/css/nouislider.css">
+	<link href="assets/css/sticky.css" rel="stylesheet" type="text/css">
+	<!-- Utility classes for CSS -->
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.lazy.min.js"></script>
+	<script src="assets/js/smooth-scrollbar.js"></script>
+	<script src="assets/js/three.min.js"></script>
+	<script src="assets/js/OrbitControls.min.js"></script>
+	<script src="assets/js/mannequin.js"></script>
+	<script src="assets/js/nouislider.js"></script>
 
-		<!-- Wrapper -->
-			<div id="wrapper">
 
-				<!-- Header -->
-					<header id="header">
-						<div class="logo">
-							<span class="icon fa-diamond"></span>
-						</div>
-						<div class="content">
-							<div class="inner">
-								<h1>Dimension</h1>
-								<p><!--[-->A fully responsive site template designed by <a href="https://html5up.net">HTML5 UP</a> and released<!--]--><br />
-								<!--[-->for free under the <a href="https://html5up.net/license">Creative Commons</a> license.<!--]--></p>
-							</div>
-						</div>
-						<nav>
-							<ul>
-								<li><a href="#intro">Intro</a></li>
-								<li><a href="#work">Work</a></li>
-								<li><a href="#about">About</a></li>
-								<li><a href="#contact">Contact</a></li>
-								<!--<li><a href="#elements">Elements</a></li>-->
-							</ul>
-						</nav>
-					</header>
+	<script>
 
-				<!-- Main -->
-					<div id="main">
+		function HideMobilePanel() {
+			if ($(window).width() < 759) {
+				if($(".panel").hasClass("expanded")){
+					$(".panel").removeClass("expanded");
+					$("html").css("overflow-y", "auto");
+				} else {
+					$(".panel").addClass("expanded");
+					$("html").css("overflow-y", "hidden");
+				}
+			}
+		}
 
-						<!-- Intro -->
-							<article id="intro">
-								<h2 class="major">Intro</h2>
-								<span class="image main"><img src="images/pic01.jpg" alt="" /></span>
-								<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. By the way, check out my <a href="#work">awesome work</a>.</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
-							</article>
+		function showHidePanel(){
+			if ($(window).width() < 759) {
+				HideMobilePanel();
+			} else {
+				if($(".panel").hasClass("hidden")){
+					$(".panel, .hidepanelbtn").removeClass("hidden");
+				} else {
+					$(".panel, .hidepanelbtn").addClass("hidden");
+				}
+			}
+		}
 
-						<!-- Work -->
-							<article id="work">
-								<h2 class="major">Work</h2>
-								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
-								<p>Adipiscing magna sed dolor elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices.</p>
-								<p>Nullam et orci eu lorem consequat tincidunt vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus pharetra. Pellentesque condimentum sem. In efficitur ligula tate urna. Maecenas laoreet massa vel lacinia pellentesque lorem ipsum dolor. Nullam et orci eu lorem consequat tincidunt. Vivamus et sagittis libero. Mauris aliquet magna magna sed nunc rhoncus amet feugiat tempus.</p>
-							</article>
+		function toggleDiv() {
+			var div = document.getElementById("side-control-of-buttons");
+			div.style.display = div.style.display == "none" ? "block" : "none";
+		}
 
-						<!-- About -->
-							<article id="about">
-								<h2 class="major">About</h2>
-								<span class="image main"><img src="images/pic03.jpg" alt="" /></span>
-								<p>Lorem ipsum dolor sit amet, consectetur et adipiscing elit. Praesent eleifend dignissim arcu, at eleifend sapien imperdiet ac. Aliquam erat volutpat. Praesent urna nisi, fringila lorem et vehicula lacinia quam. Integer sollicitudin mauris nec lorem luctus ultrices. Aliquam libero et malesuada fames ac ante ipsum primis in faucibus. Cras viverra ligula sit amet ex mollis mattis lorem ipsum dolor sit amet.</p>
-							</article>
+	</script>
+</head>
+<body>
+<div id="side-control-of-buttons" class="controls-side" bis_skin_checked="1">
+	<div id="open-sheet" aria-controls="sheet"
+		 style="border-radius: 50px;
+			    width: 40px;
+			    height: 40px;
+			    box-shadow: 0 1px 5px rgb(0 0 0 / 10%);
+			    display: inline-block;
+			    margin: 5px;
+			    overflow: hidden;
+			    background-color: #fff;
+			    padding: 2px;
+    			cursor: pointer;"><img src="assets/images/settings.svg" style="height: 40px;width: 40px;"/></div>
 
-						<!-- Contact -->
-							<article id="contact">
-								<h2 class="major">Contact</h2>
-								<form method="post" action="#">
-									<div class="field half first">
-										<label for="name">Name</label>
-										<input type="text" name="name" id="name" />
-									</div>
-									<div class="field half">
-										<label for="email">Email</label>
-										<input type="text" name="email" id="email" />
-									</div>
-									<div class="field">
-										<label for="message">Message</label>
-										<textarea name="message" id="message" rows="4"></textarea>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="special" /></li>
-										<li><input type="reset" value="Reset" /></li>
-									</ul>
-								</form>
-								<ul class="icons">
-									<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</article>
 
-						<!-- Elements -->
-							<article id="elements">
-								<h2 class="major">Elements</h2>
-
-								<section>
-									<h3 class="major">Text</h3>
-									<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
-									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
-									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
-									<hr />
-									<h2>Heading Level 2</h2>
-									<h3>Heading Level 3</h3>
-									<h4>Heading Level 4</h4>
-									<h5>Heading Level 5</h5>
-									<h6>Heading Level 6</h6>
-									<hr />
-									<h4>Blockquote</h4>
-									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
-									<h4>Preformatted</h4>
-									<pre><code>i = 0;
-
-while (!deck.isInOrder()) {
-    print 'Iteration ' + i;
-    deck.shuffle();
-    i++;
-}
-
-print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
-								</section>
-
-								<section>
-									<h3 class="major">Lists</h3>
-
-									<h4>Unordered</h4>
-									<ul>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
-
-									<h4>Alternate</h4>
-									<ul class="alt">
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
-
-									<h4>Ordered</h4>
-									<ol>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis viverra.</li>
-										<li>Felis enim feugiat.</li>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis lorem.</li>
-										<li>Felis enim et feugiat.</li>
-									</ol>
-									<h4>Icons</h4>
-									<ul class="icons">
-										<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
-									</ul>
-
-									<h4>Actions</h4>
-									<ul class="actions">
-										<li><a href="#" class="button special">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions vertical">
-										<li><a href="#" class="button special">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-								</section>
-
-								<section>
-									<h3 class="major">Table</h3>
-									<h4>Default</h4>
-									<div class="table-wrapper">
-										<table>
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-
-									<h4>Alternate</h4>
-									<div class="table-wrapper">
-										<table class="alt">
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-								</section>
-
-								<section>
-									<h3 class="major">Buttons</h3>
-									<ul class="actions">
-										<li><a href="#" class="button special">Special</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button">Default</a></li>
-										<li><a href="#" class="button small">Small</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button special icon fa-download">Icon</a></li>
-										<li><a href="#" class="button icon fa-download">Icon</a></li>
-									</ul>
-									<ul class="actions">
-										<li><span class="button special disabled">Disabled</span></li>
-										<li><span class="button disabled">Disabled</span></li>
-									</ul>
-								</section>
-
-								<section>
-									<h3 class="major">Form</h3>
-									<form method="post" action="#">
-										<div class="field half first">
-											<label for="demo-name">Name</label>
-											<input type="text" name="demo-name" id="demo-name" value="" placeholder="Jane Doe" />
-										</div>
-										<div class="field half">
-											<label for="demo-email">Email</label>
-											<input type="email" name="demo-email" id="demo-email" value="" placeholder="jane@untitled.tld" />
-										</div>
-										<div class="field">
-											<label for="demo-category">Category</label>
-											<div class="select-wrapper">
-												<select name="demo-category" id="demo-category">
-													<option value="">-</option>
-													<option value="1">Manufacturing</option>
-													<option value="1">Shipping</option>
-													<option value="1">Administration</option>
-													<option value="1">Human Resources</option>
-												</select>
-											</div>
-										</div>
-										<div class="field half first">
-											<input type="radio" id="demo-priority-low" name="demo-priority" checked>
-											<label for="demo-priority-low">Low</label>
-										</div>
-										<div class="field half">
-											<input type="radio" id="demo-priority-high" name="demo-priority">
-											<label for="demo-priority-high">High</label>
-										</div>
-										<div class="field half first">
-											<input type="checkbox" id="demo-copy" name="demo-copy">
-											<label for="demo-copy">Email me a copy</label>
-										</div>
-										<div class="field half">
-											<input type="checkbox" id="demo-human" name="demo-human" checked>
-											<label for="demo-human">Not a robot</label>
-										</div>
-										<div class="field">
-											<label for="demo-message">Message</label>
-											<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-										</div>
-										<ul class="actions">
-											<li><input type="submit" value="Send Message" class="special" /></li>
-											<li><input type="reset" value="Reset" /></li>
-										</ul>
-									</form>
-								</section>
-
-							</article>
-
-					</div>
-
-				<!-- Footer -->
-					<footer id="footer">
-						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
-					</footer>
-
+	<div class="controls" bis_skin_checked="1">
+		<label class="movebtn tilt3d"><input id="rot-z"
+											 type="checkbox" class="toggle" checked=""><span
+				id="rot-z-name">Tilt</span></label>
+		<div class="controlhint" bis_skin_checked="1">
+			<div class="controlhintinner" bis_skin_checked="1">
+				<b>Rotate on the Z axis</b>E.g. nodding head<i>Shortcut: Z</i>
 			</div>
+		</div>
+	</div>
+	<div class="controls" bis_skin_checked="1">
+		<label class="movebtn roll3d"><input id="rot-x"
+											 type="checkbox" class="toggle"><span id="rot-x-name">Roll</span></label>
+		<div class="controlhint" bis_skin_checked="1">
+			<div class="controlhintinner" bis_skin_checked="1">
+				<b>Rotate on the X axis</b>Like tilting head
+			</div>
+		</div>
+	</div>
+	<div class="controls" bis_skin_checked="1">
+		<label class="movebtn rotate3d"><input id="rot-y"
+											   type="checkbox" class="toggle"><span id="rot-y-name">Rotate</span></label>
+		<div class="controlhint" bis_skin_checked="1">
+			<div class="controlhintinner" bis_skin_checked="1">
+				<b>Rotate on the Y axis</b>Like turning head
+			</div>
+		</div>
+	</div>
+	<div class="controls" bis_skin_checked="1">
+		<label class="movebtn move3d"><input id="mov-y"
+											 type="checkbox" class="toggle"><span>Move</span></label>
+		<div class="controlhint" bis_skin_checked="1">
+			<div class="controlhintinner" bis_skin_checked="1">
+				<b>Move along the Y axis</b><i>
+			</div>
+		</div>
+	</div>
 
-		<!-- BG -->
-			<div id="bg"></div>
+	<div onclick="toggleDrawing();"
+		 style="border-radius: 50px;
+			    width: 40px;
+			    height: 40px;
+			    box-shadow: 0 1px 5px rgb(0 0 0 / 10%);
+			    display: inline-block;
+			    margin: 5px;
+			    overflow: hidden;
+			    background-color: #fff;
+			    padding: 2px;
+    			cursor: pointer;"><img src="assets/images/man.svg" style="height: 36px;width: 35px;"/></div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+</div>
 
-	</body>
+
+
+
+<div style="display: none;" bis_skin_checked="1">
+	<input id="inverse-kinematics" type="checkbox" class="toggle checkbox">
+	<label for="inverse-kinematics"><span>Inverse
+				kinematics</span></label><br> <input id="biological-constraints"
+													 type="checkbox" class="toggle checkbox" checked="">
+</div>
+
+
+<!-- The sheet component -->
+<div id="sheet" class="column items-center justify-end" aria-hidden="true">
+	<!-- Dark background for the sheet -->
+	<div class="overlay"></div>
+
+	<!-- The sheet itself -->
+	<div class="contents column">
+		<!-- Sheet controls -->
+		<header class="controls">
+			<!-- The thing to drag if you want to resize the sheet -->
+			<div class="draggable-area">
+				<div class="draggable-thumb"></div>
+			</div>
+			<!-- Button to close the sheet -->
+			<button class="close-sheet" type="button" title="Close the sheet">&times;</button>
+		</header>
+
+		<!-- Body of the sheet -->
+		<main class="body fill column">
+			<h2>Configure your model</h2>
+
+			<section data-scrollbar>
+				<h3>Height &amp; Width</h3>
+				<label for="height">Model Height</label>
+				<div class="slider-styled" id="sliderheight" style="margin:10px;"></div>
+				<br>
+				<br>
+				<label for="width">Model Width</label>
+				<div class="slider-styled" id="sliderwidth" style="margin:10px;"></div>
+				<br>
+				<br>
+				<br>
+				<h3>Posture presets</h3>
+				<details open="">
+					<summary>Basic Postures</summary>
+
+					<div class="flexbtnwrap" bis_skin_checked="1">
+						<button class="setposebtn" onclick="setPosture('0');">
+							<span class="btntext">Reset</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('1');">
+							<span class="btntext">Walking</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('2');">
+							<span class="btntext">Standing 1</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('3');">
+							<span class="btntext">Standing 2</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('4');">
+							<span class="btntext">Falling backwards</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('5');">
+							<span class="btntext">Crossed arms</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('6');">
+							<span class="btntext">Kneeling</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('7');">
+							<span class="btntext">Squatting</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('8');">
+							<span class="btntext">Pushing</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('9');">
+							<span class="btntext">Pulling</span>
+						</button>
+					</div>
+				</details>
+				<details open="">
+					<summary>Sports</summary>
+					<div class="flexbtnwrap" bis_skin_checked="1">
+						<button class="setposebtn" onclick="setPosture('10');">
+							<span class="btntext">Jogging</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('11');">
+							<span class="btntext">Running</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('12');">
+							<span class="btntext">Sprinting</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('13');"
+								data-prop="small ball (right hand)">
+							<span class="btntext">Throwing</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('14');"
+								data-prop="racket (right hand)">
+							<span class="btntext">Tennis serve</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('15');"
+								data-prop="racket (right hand)">
+							<span class="btntext">Tennis forehand</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('16');"
+								data-prop="racket (right hand)">
+							<span class="btntext">Tennis backhand</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('17');">
+							<span class="btntext">Ballet arabesque</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('18');">
+							<span class="btntext">Ballet attitude</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('19');">
+							<span class="btntext">Ballet croise</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('20');">
+							<span class="btntext">Dive</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('21');">
+							<span class="btntext">Hanging bar</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('22');">
+							<span class="btntext">Pull up</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('23');">
+							<span class="btntext">Ball kick</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('24');">
+							<span class="btntext">Goalkeeping</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('25');"
+								data-prop="basketball (left hand)">
+							<span class="btntext">Basketball dribble</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('26');"
+								data-prop="basketball (right hand)">
+							<span class="btntext">Basketball jump shot</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('27');"
+								data-prop="basketball (right hand)">
+							<span class="btntext">Basketball dunk</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('28');">
+							<span class="btntext">Volleyball jump serve</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('29');"
+								data-prop="bow (left hand)">
+							<span class="btntext">Kneeled archery</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('30');"
+								data-prop="bow (left hand)">
+							<span class="btntext">Mid-air archery</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('31');">
+							<span class="btntext">Cycling</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('32');">
+							<span class="btntext">Handstand</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('33');">
+							<span class="btntext">Elbow stand</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('34');">
+							<span class="btntext">Downward dog</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('35');">
+							<span class="btntext">Upward dog</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('36');">
+							<span class="btntext">Split</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('37');">
+							<span class="btntext">Cartwheel</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('38');">
+							<span class="btntext">Deadlift</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('39');">
+							<span class="btntext">Snatch</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('40');">
+							<span class="btntext">Surfing</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('41');"
+								data-prop="stick (right hand)">
+							<span class="btntext">Golf</span>
+						</button>
+					</div>
+				</details>
+				<details open="">
+					<summary>Combat Postures</summary>
+					<div class="flexbtnwrap" bis_skin_checked="1">
+						<button class="setposebtn" onclick="setPosture('42');"
+								data-prop="rifle (right hand)">
+							<span class="btntext">Kneeled shooting</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('43');"
+								data-prop="rifle (right hand)">
+							<span class="btntext">Prone shooting</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('44');"
+								data-prop="rifle (right hand)">
+							<span class="btntext">Hip shooting</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('45');">
+							<span class="btntext">Salute</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('46');">
+							<span class="btntext">Right hook</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('47');">
+							<span class="btntext">Uppercut</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('48');">
+							<span class="btntext">Left jab</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('49');">
+							<span class="btntext">High kick</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('50');">
+							<span class="btntext">Karate kick</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('51');"
+								data-prop="sword (right hand)">
+							<span class="btntext">Sword lunge</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('52');"
+								data-prop="sword (right hand)">
+							<span class="btntext">Sword high blow</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('53');"
+								data-prop="sword (right hand)">
+							<span class="btntext">Sword diagonal blow</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('54');"
+								data-prop="sword (right hand)">
+							<span class="btntext">Sword side blow</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('55');"
+								data-prop="sword (right hand)">
+							<span class="btntext">Sword block</span>
+						</button>
+					</div>
+				</details>
+
+				<details open="">
+					<summary>Working Postures</summary>
+					<div class="flexbtnwrap" bis_skin_checked="1">
+						<button class="setposebtn" onclick="setPosture('56');"
+								data-prop="stick (right hand)">
+							<span class="btntext">Digging</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('57');">
+							<span class="btntext">Scrubbing floor</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('58');">
+							<span class="btntext">Carrying 1</span>
+						</button>
+					</div>
+				</details>
+				<details open="">
+					<summary>Film &amp; TV Postures</summary>
+					<div class="flexbtnwrap" bis_skin_checked="1">
+						<button class="setposebtn" onclick="setPosture('59');">
+							<span class="btntext">Matrix</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('60');">
+							<span class="btntext">Titanic</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('61');">
+							<span class="btntext">Harry Potter</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('62');"
+								data-prop="stick (left hand)">
+							<span class="btntext">Star Wars</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('63');">
+							<span class="btntext">Spiderman</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('64');">
+							<span class="btntext">Superman</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('65');">
+							<span class="btntext">Wonder Woman</span>
+						</button>
+					</div>
+				</details>
+				<details open="">
+					<summary>Emotions Postures</summary>
+					<div class="flexbtnwrap" bis_skin_checked="1">
+						<button class="setposebtn" onclick="setPosture('66');">
+							<span class="btntext">Sad</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('67');">
+							<span class="btntext">Disgusted</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('68');">
+							<span class="btntext">Happy</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('69');">
+							<span class="btntext">Excited</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('70');">
+							<span class="btntext">Surprised</span>
+						</button>
+					</div>
+				</details>
+				<details open="">
+					<summary>Sitting Postures</summary>
+					<div class="flexbtnwrap" bis_skin_checked="1">
+						<button class="setposebtn" onclick="setPosture('71');">
+							<span class="btntext">Sitting 1</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('72');">
+							<span class="btntext">Sitting 2</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('73');">
+							<span class="btntext">Sitting 3</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('74');">
+							<span class="btntext">Sitting 4</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('75');">
+							<span class="btntext">Sitting 5</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('76');">
+							<span class="btntext">Sitting 6</span>
+						</button>
+					</div>
+				</details>
+				<details open="">
+					<summary>Laying down Postures</summary>
+					<div class="flexbtnwrap" bis_skin_checked="1">
+						<button class="setposebtn" onclick="setPosture('77');">
+							<span class="btntext">Lying 1</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('78');">
+							<span class="btntext">Lying 2</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('79');">
+							<span class="btntext">Sleeping</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('80');">
+							<span class="btntext">Sleeping 2</span>
+						</button>
+						<button class="setposebtn" onclick="setPosture('81');">
+							<span class="btntext">Sleeping 3</span>
+						</button>
+					</div>
+				</details>
+			</section>
+
+
+		</main>
+	</div>
+</div>
+
+<script src="assets/js/posture-editor.js"></script>
+<script>
+	Scrollbar.initAll();
+	var sliderheight = document.getElementById('sliderheight');
+	var sliderwidth = document.getElementById('sliderwidth');
+
+	noUiSlider.create(sliderheight, {
+		step: 0.02,
+
+		pips: {
+			mode: 'steps',
+			stepped: true,
+			density: 4
+		},
+		start: [1],
+
+		connect: true,
+		range: {
+			'min': 0.8,
+			'max': 1.2
+		}
+	});
+
+
+	noUiSlider.create(sliderwidth, {
+		step: 0.02,
+
+		pips: {
+			mode: 'steps',
+			stepped: true,
+			density: 4
+		},
+		start: [1],
+
+		connect: true,
+		range: {
+			'min': 0.8,
+			'max': 1.4
+		}
+	});
+	sliderheight.noUiSlider.on('update', function (values, handle) {
+		console.log(values[handle]);
+		model.torso.scale.set(model.torso.scale["x"], values[handle], model.torso.scale["z"]);
+		model.l_arm.scale.set(model.l_arm.scale["x"], values[handle], model.l_arm.scale["z"]);
+		model.r_arm.scale.set(model.r_arm.scale["x"], values[handle], model.r_arm.scale["z"]);
+		model.l_leg.scale.set(model.l_leg.scale["x"], values[handle], model.l_leg.scale["z"]);
+		model.r_leg.scale.set(model.r_leg.scale["x"], values[handle], model.r_leg.scale["z"]);
+		renderer.render(scene, camera);
+
+
+	});
+
+	sliderwidth.noUiSlider.on('update', function (values, handle) {
+		console.log(values[handle]);
+		model.torso.scale.set(values[handle], model.torso.scale["y"], model.torso.scale["z"]);
+		model.torso.scale.set(values[handle], model.torso.scale["y"], values[handle]);
+
+		model.l_arm.scale.set(values[handle], model.l_arm.scale["y"] ,values[handle]);
+		model.r_arm.scale.set(values[handle], model.r_arm.scale["y"], values[handle]);
+		model.l_leg.scale.set(values[handle], model.l_leg.scale["y"], values[handle]);
+		model.r_leg.scale.set(values[handle], model.r_leg.scale["y"], values[handle]);
+
+
+
+		renderer.render(scene, camera);
+
+
+	});
+
+</script>
+
+</body>
+<script src="assets/js/main.js"></script>
 </html>

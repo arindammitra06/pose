@@ -4,7 +4,7 @@ const $ = document.querySelector.bind(document)
 
 const openSheetButton = $("#open-sheet")
 const sheet = $("#sheet")
-const sheetContents = sheet.querySelector(".contents")
+const sheetContents = sheet.querySelector(".sheet-contents")
 const draggableArea = sheet.querySelector(".draggable-area")
 
 let sheetHeight // in vh
